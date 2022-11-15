@@ -64,3 +64,10 @@ vendor/pkg/
 pyenv
 Vagrantfile
 Footer
+
+
+# Ignore .env files
+.env
+.env.example
+.env.local
+.env.staging
