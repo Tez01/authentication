@@ -15,12 +15,17 @@ export function AuthenticationProvider({ children }) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
+  // This state is for checking if a user is already saved in local storage,
+  // By default loads, and is toggled when user has been set on mount
+  const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
   // Using useEffect with empty dependency array to run this only once
-  //  Login a user if there is already a user in the cookie or session
+  // Set a user if there is already a user in the cookie or session
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      // Done loading, so set loading false
+      setLoading(false);
     });
 
     // To unsubscribe on unmount
@@ -29,7 +34,8 @@ export function AuthenticationProvider({ children }) {
 
   return (
     <AuthenticationContext.Provider value={{ currentUser, signup }}>
-      {children}
+      {/* Render children only when not loading */}
+      {!loading && children}
     </AuthenticationContext.Provider>
   );
 }
