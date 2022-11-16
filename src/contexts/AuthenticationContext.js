@@ -15,6 +15,8 @@ export function AuthenticationProvider({ children }) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
+  // Login a user in firebase
+
   // This state is for checking if a user is already saved in local storage,
   // By default loads, and is toggled when user has been set on mount
   const [loading, setLoading] = useState(true);

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuthentication } from "../contexts/AuthenticationContext";
 
 function Signup() {
@@ -32,7 +33,6 @@ function Signup() {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Signup</h1>
-      {JSON.stringify(currentUser)}
       {error ? error : ""}
       <input type="email" placeholder="Email" name="email" ref={emailRef} />
       <input
@@ -50,6 +50,9 @@ function Signup() {
       <button disabled={loading} type="submit">
         Sign Up
       </button>
+      <div>
+        Already have an account? <Link to="/login">Log In</Link>
+      </div>
     </form>
   );
 }
