@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth, storage } from "../firebase";
-import { ref, uploadBytes } from "firebase/storage";
+
 const AuthenticationContext = createContext();
 
 // Custom Hook to use the context for authentication
@@ -26,15 +26,20 @@ export function AuthenticationProvider({ children }) {
   }
 
   // Upload profile picture in firebase
-  async function upload(file, currentUser) {
-    const fileRef = ref(storage, currentUser.uid + ".png");
-    try {
-      const response = await uploadBytes(fileRef, file);
-      // If successful, update the profile of user to have this photoURL.
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // async function upload(file, userId) {
+  //   const fileRef = ref(storage, userId + ".png");
+  //   try {
+  //     const response = await uploadBytes(fileRef, file);
+
+  //     // Get the url of uploaded photo
+  //     const photoURL = await getDownloadURL(fileRef);
+  //     // If successful, update the profile of user to have this photoURL.
+
+  //     updateProfile(currentUser, { photoURL });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
   // This state is for checking if a user is already saved in local storage,
   // By default loads, and is toggled when user has been set on mount
   const [loading, setLoading] = useState(true);
@@ -45,6 +50,7 @@ export function AuthenticationProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       // Done loading, so set loading false
+
       setLoading(false);
     });
 
@@ -54,7 +60,7 @@ export function AuthenticationProvider({ children }) {
 
   return (
     <AuthenticationContext.Provider
-      value={{ currentUser, signup, login, logout, upload }}
+      value={{ currentUser, signup, login, logout }}
     >
       {/* Render children only when not loading */}
       {!loading && children}

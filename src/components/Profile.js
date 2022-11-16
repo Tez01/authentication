@@ -16,12 +16,15 @@ function Profile() {
       setError("Failed to Log Out");
     }
   }
-
   return (
     <>
       <h1>Profile</h1>
       {error}
       <strong>Email:</strong> {currentUser.email}
+      <img
+        alt="profilePic"
+        src={currentUser.photoURL ? currentUser.photoURL : `./default.png`}
+      />
       <div>
         <button onClick={handleLogout}>
           <Link to="/signup">Log Out</Link>
