@@ -1,16 +1,29 @@
+import { upload } from "@testing-library/user-event/dist/upload";
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../contexts/AuthenticationContext";
 
+const defaultImageUrl = "./default.png";
 function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
 
-  const { signup } = useAuthentication();
+  const { signup, upload, currentUser } = useAuthentication();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [imageUploaded, setImageUpload] = useState(false);
+  const [image, setImage] = useState(null);
+
+  const [imageUrl, setImageUrl] = useState(defaultImageUrl);
   const navigate = useNavigate();
+
+  function handleImageUpload(e) {
+    setImageUpload(true);
+    setImageUrl(window.URL.createObjectURL(e.target.files[0]));
+    setImage(e.target.files[0]);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -23,14 +36,26 @@ function Signup() {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      const response = await signup(
+        emailRef.current.value,
+        passwordRef.current.value
+      );
+      console.log(response.uid);
+      console.log(`currentUser ${currentUser}`);
+      console.log(image);
+      // Navigate to profile page after signup
+      navigate("/");
+      // Upload the profile image when user is created
+      // if (currentUser != null && image !== null) {
+      //   console.log(currentUser.uid);
+      // upload(image, currentUser.uid);
+      // }
     } catch (err) {
       console.log(err);
       setError("Failed to create an account");
     }
+
     setLoading(false);
-    // Navigate to profile page after signup
-    navigate("/");
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -49,9 +74,14 @@ function Signup() {
         name="password-confirmation"
         ref={passwordConfirmationRef}
       />
+      <input type="file" onChange={handleImageUpload} />
       <button disabled={loading} type="submit">
         Sign Up
       </button>
+      <div>
+        {/* Load image if uploaded */}
+        {imageUploaded && <img alt="default" src={imageUrl} />}
+      </div>
       <div>
         Already have an account? <Link to="/login">Log In</Link>
       </div>

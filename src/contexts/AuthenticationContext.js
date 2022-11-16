@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
-
+import { auth, storage } from "../firebase";
+import { ref, uploadBytes } from "firebase/storage";
 const AuthenticationContext = createContext();
 
 // Custom Hook to use the context for authentication
@@ -11,7 +11,7 @@ export function useAuthentication() {
 // Directly export the provider with all the functionality for signup intact
 export function AuthenticationProvider({ children }) {
   // Signup a user in firebase
-  function signup(email, password) {
+  function signup(email, password, profilePicture) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
@@ -23,6 +23,17 @@ export function AuthenticationProvider({ children }) {
   // Logout a user
   function logout() {
     return auth.signOut();
+  }
+
+  // Upload profile picture in firebase
+  async function upload(file, currentUser) {
+    const fileRef = ref(storage, currentUser.uid + ".png");
+    try {
+      const response = await uploadBytes(fileRef, file);
+      // If successful, update the profile of user to have this photoURL.
+    } catch (err) {
+      console.log(err);
+    }
   }
   // This state is for checking if a user is already saved in local storage,
   // By default loads, and is toggled when user has been set on mount
@@ -43,7 +54,7 @@ export function AuthenticationProvider({ children }) {
 
   return (
     <AuthenticationContext.Provider
-      value={{ currentUser, signup, login, logout }}
+      value={{ currentUser, signup, login, logout, upload }}
     >
       {/* Render children only when not loading */}
       {!loading && children}

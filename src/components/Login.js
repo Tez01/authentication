@@ -17,17 +17,18 @@ function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+
+      // Navigate to profile page after login
+      navigate("/");
     } catch {
       setError("Failed to log in");
     }
     setLoading(false);
-    // Navigate to profile page after login
-    navigate("/");
   }
   return (
     <form onSubmit={handleSubmit}>
       <h1>Log In</h1>
-      {error}
+      {error && error}
       <input type="email" placeholder="Email" name="email" ref={emailRef} />
       <input
         type="password"
