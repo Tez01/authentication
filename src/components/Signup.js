@@ -18,6 +18,7 @@ function Signup() {
       return setError("Passwords do not match");
     }
 
+    // Try to signup
     try {
       setError("");
       setLoading(true);
