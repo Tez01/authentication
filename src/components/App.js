@@ -2,12 +2,13 @@ import Signup from "./Signup";
 import { AuthenticationProvider } from "../contexts/AuthenticationContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login";
+import Profile from "./Profile";
 function App() {
   return (
     <BrowserRouter>
       <AuthenticationProvider>
         <Routes>
-          {/* <Route exact path="/" component={Profile} /> */}
+          <Route exact path="/" element={<Profile />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>

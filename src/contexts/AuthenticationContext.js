@@ -16,7 +16,14 @@ export function AuthenticationProvider({ children }) {
   }
 
   // Login a user in firebase
+  function login(email, password) {
+    return auth.signInWithEmailAndPassword(email, password);
+  }
 
+  // Logout a user
+  function logout() {
+    return auth.signOut();
+  }
   // This state is for checking if a user is already saved in local storage,
   // By default loads, and is toggled when user has been set on mount
   const [loading, setLoading] = useState(true);
@@ -35,7 +42,9 @@ export function AuthenticationProvider({ children }) {
   }, []);
 
   return (
-    <AuthenticationContext.Provider value={{ currentUser, signup }}>
+    <AuthenticationContext.Provider
+      value={{ currentUser, signup, login, logout }}
+    >
       {/* Render children only when not loading */}
       {!loading && children}
     </AuthenticationContext.Provider>

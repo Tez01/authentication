@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../contexts/AuthenticationContext";
 
 function Login() {
@@ -8,8 +8,8 @@ function Login() {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const { login } = useAuthentication;
+  const navigate = useNavigate();
+  const { login } = useAuthentication();
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -18,8 +18,11 @@ function Login() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
     } catch {
-      setError("Failed to login");
+      setError("Failed to log in");
     }
+    setLoading(false);
+    // Navigate to profile page after login
+    navigate("/");
   }
   return (
     <form onSubmit={handleSubmit}>

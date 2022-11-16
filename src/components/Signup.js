@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../contexts/AuthenticationContext";
 
 function Signup() {
@@ -7,10 +7,10 @@ function Signup() {
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
 
-  const { currentUser, signup } = useAuthentication();
+  const { signup } = useAuthentication();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -29,6 +29,8 @@ function Signup() {
       setError("Failed to create an account");
     }
     setLoading(false);
+    // Navigate to profile page after signup
+    navigate("/");
   }
   return (
     <form onSubmit={handleSubmit}>
