@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <AuthenticationProvider>
         <Routes>
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/" element={<Profile />} />
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route exact path="/" element={<Profile />} />
           </Route>
           <Route exact path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
