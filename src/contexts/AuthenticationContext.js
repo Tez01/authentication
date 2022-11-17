@@ -12,6 +12,7 @@ export function useAuthentication() {
 
 // Directly export the provider with all the functionality for signup, login, logout intact
 export function AuthenticationProvider({ children }) {
+  /****** State variables ********** */
   // This state is for checking if a process is going on such as current user being updated
   // If in loading state, no component is rendered
   const [loading, setLoading] = useState(true);
@@ -23,7 +24,7 @@ export function AuthenticationProvider({ children }) {
     // THis is called whenever user is signed up
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      // Done loading, so set loading false
+      // When user set, loading- false
 
       setLoading(false);
     });
