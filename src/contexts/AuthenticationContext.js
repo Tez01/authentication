@@ -1,7 +1,7 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {auth, storage} from '../firebase';
-import {getDownloadURL, ref, uploadBytes} from 'firebase/storage';
-import {updateProfile} from 'firebase/auth';
+import React, {createContext, useContext, useEffect, useState} from 'react.js';
+import {auth, storage} from '../firebase.js';
+import {getDownloadURL, ref, uploadBytes} from 'firebase/storage.js';
+import {updateProfile} from 'firebase/auth.js';
 
 const AuthenticationContext = createContext();
 

@@ -1,9 +1,9 @@
-import Signup from './Signup';
-import {AuthenticationProvider} from '../contexts/AuthenticationContext';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Login from './Login';
-import Profile from './Profile';
-import PrivateRoute from './PrivateRoute';
+import {BrowserRouter, Routes, Route} from 'react-router-dom.js';
+import Signup from './Signup.js';
+import {AuthenticationProvider} from '../contexts/AuthenticationContext.js';
+import Login from './Login.js';
+import Profile from './Profile.js';
+import PrivateRoute from './PrivateRoute.js';
 import '../index.css';
 import '../App.css';
 

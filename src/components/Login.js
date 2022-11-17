@@ -1,6 +1,6 @@
-import React, {useRef, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import {useAuthentication} from '../contexts/AuthenticationContext';
+import React, {useRef, useState} from 'react.js';
+import {Link, useNavigate} from 'react-router-dom.js';
+import {useAuthentication} from '../contexts/AuthenticationContext.js';
 
 function Login() {
     /********** Refs *******************/
