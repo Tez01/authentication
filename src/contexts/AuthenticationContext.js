@@ -53,11 +53,12 @@ export function AuthenticationProvider({ children }) {
     const fileRef = ref(storage, user.uid + ".png");
     try {
       const response = await uploadBytes(fileRef, file);
-
-      // Get the url of uploaded photo
-      const photoURL = await getDownloadURL(fileRef);
-      // If successful, update the profile of user to have this photoURL.
-      await updateProfile(user, { photoURL });
+      if (response != null) {
+        // Get the url of uploaded photo
+        const photoURL = await getDownloadURL(fileRef);
+        // If successful, update the profile of user to have this photoURL.
+        await updateProfile(user, { photoURL });
+      }
     } catch (err) {
       console.log(err);
     }
