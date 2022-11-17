@@ -1,10 +1,10 @@
-import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuthentication } from "../contexts/AuthenticationContext";
+import React from 'react';
+import {Navigate, Outlet} from 'react-router-dom';
+import {useAuthentication} from '../contexts/AuthenticationContext';
 
 export default function PrivateRoute() {
-  const { currentUser } = useAuthentication();
+    const {currentUser} = useAuthentication();
 
-  // Render the children if user exists, otherwise navigate to login page
-  return currentUser ? <Outlet /> : <Navigate to="/login" />;
+    // Render the children if user exists, otherwise navigate to login page
+    return currentUser ? <Outlet /> : <Navigate to='/login' />;
 }

@@ -71,3 +71,7 @@ Footer
 .env.example
 .env.local
 .env.staging
+
+# Ignore .eslintrc.js files
+.eslintrc.js
+.eslintrc.json
