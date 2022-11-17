@@ -1,6 +1,7 @@
 # Authentication
 
-A **React** application for creating the authentication functionality of a website. The application has three pages: signup, login and profile. The data storage and authentication is done using **firebase**. The application is hosted on Heroku which can be accessed by following this link : https://auth-a.herokuapp.com/login
+A **React** application for creating the authentication functionality of a website. The application has three pages: signup, login and profile. The data storage and authentication is done using **firebase**. 
+The application is hosted on Heroku which can be accessed by following this link : https://auth-a.herokuapp.com/login
 
 The signup page lets a user create an account on firebase with email, password and an optional profile picture. On successful signup, the user is redirected to profile page which displays the user's email and profile pitcure. The user can logout and come back again to login to profile.
 
