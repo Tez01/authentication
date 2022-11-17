@@ -1,25 +1,23 @@
-import React, {useRef, useState} from 'react.js';
-import {Link, useNavigate} from 'react-router-dom.js';
-import {useAuthentication} from '../contexts/AuthenticationContext.js';
+import React, {useRef, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {useAuthentication} from '../contexts/AuthenticationContext';
 
-const DEFAULT_IMAGE_URL = './default.png';
+const defaultImageUrl = './default.png';
 function Signup() {
     /********** Refs for DOM elements *******************/
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmationRef = useRef();
 
-    /** ******** State Variables *******************/
-
-    // This error state is used to display an error on page if it is set
-    // on any failure
+    /********** State Variables *******************/
+    // This error state is used to display an error on page if it is set on any failure
     const [error, setError] = useState('');
     // This loading state is used to disable the signup button when signup is in process
     const [loading, setLoading] = useState(false);
     // This image state is used to keep track the image when uploaded
     const [image, setImage] = useState(null);
     // This imageUrl state is the url of uploaded image, used to display the image on UI when uploaded
-    const [imageUrl, setImageUrl] = useState(DEFAULT_IMAGE_URL);
+    const [imageUrl, setImageUrl] = useState(defaultImageUrl);
 
     /********** Navigation Hook *******************/
     const navigate = useNavigate();
@@ -32,7 +30,7 @@ function Signup() {
     function handleImageUpload(e) {
         // Check if its an image
         if (!e.target.files[0].name.match(/\.(jpg|jpeg|png|gif)$/i)) {
-            setImageUrl(DEFAULT_IMAGE_URL);
+            setImageUrl(defaultImageUrl);
             alert('Not an image');
             return;
         }
