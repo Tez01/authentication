@@ -28,6 +28,13 @@ function Signup() {
 
   // This function sets the image and imageURL state variables
   function handleImageUpload(e) {
+    // Check if its an image
+    if (!e.target.files[0].name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+      setImageUrl(defaultImageUrl);
+      alert("Not an image");
+      return;
+    }
+
     setImageUrl(window.URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
   }
@@ -113,9 +120,7 @@ function Signup() {
 
           <input type="file" onChange={handleImageUpload} />
           {/* Load image if uploaded */}
-          {image && (
-            <img className="form--image" alt="default" src={imageUrl} />
-          )}
+          {<img className="form--image" alt="default" src={imageUrl} />}
 
           <button
             className="form--button bg-secondary text-secondary"
