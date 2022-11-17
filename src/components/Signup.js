@@ -58,34 +58,67 @@ function Signup() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Signup</h1>
-      {error ? error : ""}
-      <input type="email" placeholder="Email" name="email" ref={emailRef} />
-      <input
-        type="password"
-        placeholder="Password"
-        ref={passwordRef}
-        name="password"
-      />
-      <input
-        type="password"
-        placeholder="Password Confirmation"
-        name="password-confirmation"
-        ref={passwordConfirmationRef}
-      />
-      <input type="file" onChange={handleImageUpload} />
-      <button disabled={loading} type="submit">
-        Sign Up
-      </button>
-      <div>
-        {/* Load image if uploaded */}
-        {imageUploaded && <img alt="default" src={imageUrl} />}
+    <>
+      <div className="form ">
+        <form onSubmit={handleSubmit}>
+          <h1 className="form--title">Signup</h1>
+          {error ? error : ""}
+          <label htmlFor="email" className="form--label fw-semi-bold">
+            Email
+          </label>
+          <input
+            className="form--input "
+            type="email"
+            placeholder="Email"
+            name="email"
+            ref={emailRef}
+          />
+
+          <label htmlFor="password" className="form--label fw-semi-bold">
+            Password
+          </label>
+          <input
+            className="form--input "
+            type="password"
+            placeholder="Password"
+            ref={passwordRef}
+            name="password"
+          />
+
+          <label
+            htmlFor="password-confirmation"
+            className="form--label fw-semi-bold"
+          >
+            Confirm Password
+          </label>
+          <input
+            className="form--input "
+            type="password"
+            placeholder="Password Confirmation"
+            name="password-confirmation"
+            ref={passwordConfirmationRef}
+          />
+
+          <input type="file" onChange={handleImageUpload} />
+          {/* Load image if uploaded */}
+          {imageUploaded && (
+            <img className="form--image" alt="default" src={imageUrl} />
+          )}
+
+          <button
+            className="form--button bg-secondary text-secondary"
+            disabled={loading}
+            type="submit"
+          >
+            Sign Up
+          </button>
+          <div></div>
+        </form>
       </div>
       <div>
         Already have an account? <Link to="/login">Log In</Link>
       </div>
-    </form>
+    </>
   );
 }
 

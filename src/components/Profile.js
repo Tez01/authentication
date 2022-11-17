@@ -20,16 +20,21 @@ function Profile() {
     <>
       <h1>Profile</h1>
       {error}
-      <strong>Email:</strong> {currentUser.email}
+      <h4 className="profile--email">Email: {currentUser.email}</h4>
       <img
+        className="profile--image"
         alt="profilePic"
         src={currentUser.photoURL ? currentUser.photoURL : `./default.png`}
       />
-      <div>
-        <button onClick={handleLogout}>
-          <Link to="/signup">Log Out</Link>
-        </button>
-      </div>
+
+      <button
+        className="profile--button bg-secondary text-secondary"
+        onClick={handleLogout}
+      >
+        <Link to="/signup" className="text-secondary">
+          Log Out
+        </Link>
+      </button>
     </>
   );
 }

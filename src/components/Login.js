@@ -31,7 +31,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <h1 className="form--title">Log In</h1>
           {error && error}
-          <label htmlFor="name" className="form--label fw-semi-bold">
+          <label htmlFor="email" className="form--label fw-semi-bold">
             Email
           </label>
           <input
