@@ -3,12 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../contexts/AuthenticationContext";
 
 function Login() {
+  // Refs
+
   const emailRef = useRef();
   const passwordRef = useRef();
-
+  /********** State Variables *******************/
+  // This error state is used to display an error on page if it is set on any failure
   const [error, setError] = useState("");
+  // This loading state is used to disable the login button when loggin in
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+
   const { login } = useAuthentication();
   async function handleSubmit(e) {
     e.preventDefault();

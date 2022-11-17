@@ -1,4 +1,3 @@
-import { upload } from "@testing-library/user-event/dist/upload";
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../contexts/AuthenticationContext";
@@ -9,7 +8,7 @@ function Signup() {
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
 
-  const { signup, upload, currentUser } = useAuthentication();
+  const { signup, upload } = useAuthentication();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageUploaded, setImageUpload] = useState(false);
@@ -69,7 +68,6 @@ function Signup() {
           <input
             className="form--input "
             type="email"
-            placeholder="Email"
             name="email"
             ref={emailRef}
           />
@@ -80,7 +78,6 @@ function Signup() {
           <input
             className="form--input "
             type="password"
-            placeholder="Password"
             ref={passwordRef}
             name="password"
           />
@@ -94,7 +91,6 @@ function Signup() {
           <input
             className="form--input "
             type="password"
-            placeholder="Password Confirmation"
             name="password-confirmation"
             ref={passwordConfirmationRef}
           />
