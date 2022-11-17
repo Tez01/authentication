@@ -7,9 +7,9 @@ The signup page lets a user create an account on firebase with email, password a
 1. Make sure you have npm and node installed.
 2. Clone the repository from github.
 3. Go the directory of cloned repo and run `npm install` to install all the dependencies. 
-4. Create an account on firebase and have authentication turned on. Get the configuration for authentication and store it an `'env.local` file to avoid exposing credentials in version control. A sample env.local file looks like this
-`REACT_APP_FIREBASE_API_KEY = *****************
-REACT_APP_FIREBASE_AUTH_DOMAIN = *************
+4. Create an account on firebase and have authentication turned on. Get the configuration for authentication and store it an `env.local` file to avoid exposing credentials in version control. A sample env.local file looks like this \n
+`REACT_APP_FIREBASE_API_KEY = *****************\n
+REACT_APP_FIREBASE_AUTH_DOMAIN = *************\n
 ...`
 
 4. After installation, run `npm start` to start the development server. By default, the application should be accessible at localhost:3000.
