@@ -12,4 +12,6 @@ The signup page lets a user create an account on firebase with email, password a
 `REACT_APP_FIREBASE_AUTH_DOMAIN = *************`<br />
 `...`
 
-4. After installation, run `npm start` to start the development server. By default, the application should be accessible at localhost:3000.
+Note: Without this step, the application would not run.
+
+5. After installation, run `npm start` to start the development server. By default, the application should be accessible at localhost:3000.
