@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import {useAuthentication} from '../contexts/AuthenticationContext';
+import React, {useState} from 'react.js';
+import {Link, useNavigate} from 'react-router-dom.js';
+import {useAuthentication} from '../contexts/AuthenticationContext.js';
 function Profile() {
     // State of error
     const [error, setError] = useState('');
