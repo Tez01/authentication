@@ -42,4 +42,8 @@
     border: none;
     border-radius: 5px;
     padding: 1%;
+    transition: background-color 200ms;
+}
+.form--button:hover{
+    background-color: var(--clr-accent-2);
 }
