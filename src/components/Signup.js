@@ -2,9 +2,7 @@ import { upload } from "@testing-library/user-event/dist/upload";
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../contexts/AuthenticationContext";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../firebase";
-import { updateProfile } from "firebase/auth";
+
 const defaultImageUrl = "./default.png";
 function Signup() {
   const emailRef = useRef();
@@ -44,21 +42,10 @@ function Signup() {
       );
       // Get the user just created
       const user = response.user;
-      const userId = response.user.uid;
 
       // Upload the profile image when user is created
-      if (userId != null && image !== null) {
-        const fileRef = ref(storage, userId + ".png");
-        try {
-          const response = await uploadBytes(fileRef, image);
-
-          // Get the url of uploaded photo
-          const photoURL = await getDownloadURL(fileRef);
-          // If successful, update the profile of user to have this photoURL.
-          await updateProfile(user, { photoURL });
-        } catch (err) {
-          console.log(err);
-        }
+      if (user != null && image !== null) {
+        await upload(image, user);
       }
       // Navigate to profile page after signup
       navigate("/");
@@ -69,6 +56,7 @@ function Signup() {
 
     setLoading(false);
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>Signup</h1>

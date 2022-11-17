@@ -26,23 +26,45 @@ function Login() {
     setLoading(false);
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Log In</h1>
-      {error && error}
-      <input type="email" placeholder="Email" name="email" ref={emailRef} />
-      <input
-        type="password"
-        placeholder="Password"
-        ref={passwordRef}
-        name="password"
-      />
-      <button disabled={loading} type="submit">
-        Log In
-      </button>
+    <>
+      <div className="form ">
+        <form onSubmit={handleSubmit}>
+          <h1 className="form--title">Log In</h1>
+          {error && error}
+          <label htmlFor="name" className="form--label fw-semi-bold">
+            Email
+          </label>
+          <input
+            className="form--input "
+            type="email"
+            name="email"
+            ref={emailRef}
+          />
+
+          <label htmlFor="password" className="form--label fw-semi-bold">
+            Password
+          </label>
+          <input
+            className="form--input"
+            type="password"
+            ref={passwordRef}
+            name="password"
+          />
+
+          <button
+            className="form--button bg-secondary text-secondary"
+            disabled={loading}
+            type="submit"
+          >
+            Log In
+          </button>
+        </form>
+      </div>
+
       <div>
         Don't have an account? <Link to="/signup">Sign Up</Link>
       </div>
-    </form>
+    </>
   );
 }
 
