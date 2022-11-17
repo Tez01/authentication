@@ -4,26 +4,37 @@ import { useAuthentication } from "../contexts/AuthenticationContext";
 
 const defaultImageUrl = "./default.png";
 function Signup() {
+  /********** Refs for DOM elements *******************/
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
 
-  const { signup, upload } = useAuthentication();
+  /********** State Variables *******************/
+  // This error state is used to display an error on page if it is set on any failure
   const [error, setError] = useState("");
+  // This loading state is used to disable the signup button when signup is in process
   const [loading, setLoading] = useState(false);
-  const [imageUploaded, setImageUpload] = useState(false);
+  // This image state is used to keep track the image when uploaded
   const [image, setImage] = useState(null);
-
+  // This imageUrl state is the url of uploaded image, used to display the image on UI when uploaded
   const [imageUrl, setImageUrl] = useState(defaultImageUrl);
+
+  /********** Navigation Hook *******************/
   const navigate = useNavigate();
 
+  /************* Context Hook **********/
+  // Get signup and upload functionality from context
+  const { signup, upload } = useAuthentication();
+
+  // This function sets the image and imageURL state variables
   function handleImageUpload(e) {
-    setImageUpload(true);
     setImageUrl(window.URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
   }
 
-  async function handleSubmit(e) {
+  // This function sign up the user in firebase, If signup is successful, the profile image is also uploaded
+  // Any error is reported on console
+  async function handleSignUp(e) {
     e.preventDefault();
 
     // Password validation
@@ -34,6 +45,7 @@ function Signup() {
     // Try to signup
     try {
       setError("");
+      // Disable the signup button again
       setLoading(true);
       const response = await signup(
         emailRef.current.value,
@@ -53,15 +65,19 @@ function Signup() {
       setError("Failed to create an account");
     }
 
+    // Enable the signup button
     setLoading(false);
   }
 
+  // Signup Component
   return (
     <>
       <div className="form ">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSignUp}>
           <h1 className="form--title">Signup</h1>
-          {error ? error : ""}
+
+          <div className="form--error text-error">{error && error}</div>
+
           <label htmlFor="email" className="form--label fw-semi-bold">
             Email
           </label>
@@ -97,7 +113,7 @@ function Signup() {
 
           <input type="file" onChange={handleImageUpload} />
           {/* Load image if uploaded */}
-          {imageUploaded && (
+          {image && (
             <img className="form--image" alt="default" src={imageUrl} />
           )}
 
@@ -108,9 +124,9 @@ function Signup() {
           >
             Sign Up
           </button>
-          <div></div>
         </form>
       </div>
+
       <div>
         Already have an account? <Link to="/login">Log In</Link>
       </div>

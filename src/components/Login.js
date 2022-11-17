@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthentication } from "../contexts/AuthenticationContext";
 
 function Login() {
-  // Refs
-
+  /********** Refs *******************/
   const emailRef = useRef();
   const passwordRef = useRef();
   /********** State Variables *******************/
@@ -13,14 +12,20 @@ function Login() {
   // This loading state is used to disable the login button when loggin in
   const [loading, setLoading] = useState(false);
 
+  /*******Navigation hooks ******** */
   const navigate = useNavigate();
 
+  /********** Context *******************/
+  // Get login functionality from context
   const { login } = useAuthentication();
-  async function handleSubmit(e) {
+
+  // Form submit handler, used to login the user, Any error received are reported on UI
+  async function handleLogin(e) {
     e.preventDefault();
 
     try {
       setError("");
+      // Disable the login button
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
 
@@ -29,14 +34,17 @@ function Login() {
     } catch {
       setError("Failed to log in");
     }
+    // Enable the login button
     setLoading(false);
   }
+
+  /***********   The Login Component **************/
   return (
     <>
       <div className="form ">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLogin}>
           <h1 className="form--title">Log In</h1>
-          {error && error}
+          <div className="form--error text-error">{error && error}</div>
           <label htmlFor="email" className="form--label fw-semi-bold">
             Email
           </label>

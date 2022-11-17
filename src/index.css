@@ -9,6 +9,8 @@ such as primary colors, secondory colors, typography etc.    */
 --clr-secondary-text: white;
 --clr-accent-1: #b9b3b994;
 --clr-accent-2: #5493c7;
+--clr-error: red;
+--clr-success: green;
 
 
 /* Font family */
@@ -70,7 +72,13 @@ font-family: var(--ff-primary);
 .text-accent-2{
     color: var(--clr-accent-2);
 }
+.text-error{
+    color: var(--clr-error);
+}
 
+.text-success{
+    color: var(--clr-success);
+}
 
 /* For font weight */
 
