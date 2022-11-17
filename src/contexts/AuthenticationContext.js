@@ -10,8 +10,28 @@ export function useAuthentication() {
   return useContext(AuthenticationContext);
 }
 
-// Directly export the provider with all the functionality for signup intact
+// Directly export the provider with all the functionality for signup, login, logout intact
 export function AuthenticationProvider({ children }) {
+  // This state is for checking if a process is going on such as current user being updated
+  // If in loading state, no component is rendered
+  const [loading, setLoading] = useState(true);
+  // State for keeping track of current user
+  const [currentUser, setCurrentUser] = useState();
+
+  // Set the user
+  useEffect(() => {
+    // THis is called whenever user is signed up
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      // Done loading, so set loading false
+
+      setLoading(false);
+    });
+
+    // To unsubscribe on unmount
+    return unsubscribe;
+  }, []);
+
   // Signup a user in firebase
   function signup(email, password, profilePicture) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -36,29 +56,11 @@ export function AuthenticationProvider({ children }) {
       // Get the url of uploaded photo
       const photoURL = await getDownloadURL(fileRef);
       // If successful, update the profile of user to have this photoURL.
-
       await updateProfile(user, { photoURL });
     } catch (err) {
       console.log(err);
     }
   }
-  // This state is for checking if a user is already saved in local storage,
-  // By default loads, and is toggled when user has been set on mount
-  const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState();
-  // Using useEffect with empty dependency array to run this only once
-  // Set a user if there is already a user in the cookie or session
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      // Done loading, so set loading false
-
-      setLoading(false);
-    });
-
-    // To unsubscribe on unmount
-    return unsubscribe;
-  }, []);
 
   return (
     <AuthenticationContext.Provider
